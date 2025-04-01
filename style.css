@@ -1,0 +1,59 @@
+/* Фон и основной текст */
+body {
+    background-color: #1E1E1E;
+    color: #FFFFFF;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    margin: 20px;
+    line-height: 1.5;
+}
+
+/* Заголовки */
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+}
+
+/* Абзацы, цитаты и списки */
+p, blockquote, ul, ol {
+    margin-bottom: 1em;
+}
+
+/* Цитаты */
+blockquote {
+    border-left: 4px solid #555;
+    padding-left: 1em;
+    color: #ccc;
+}
+
+/* Блоки кода и инлайн-код */
+pre, code {
+    background-color: #2E2E2E;
+    color: #FFFFFF;
+    font-family: 'Fira Code', monospace;
+    border-radius: 4px;
+    padding: 6px;
+}
+pre {
+    overflow-x: auto;
+    margin-bottom: 1em;
+}
+
+/* Горизонтальные линии */
+hr {
+    border: none;
+    border-top: 1px solid #555;
+    margin: 1em 0;
+}
+
+/* Ссылки */
+a {
+    color: #72baff;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    max-width: 100%;
+}
