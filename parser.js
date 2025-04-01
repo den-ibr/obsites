@@ -242,7 +242,6 @@ function convertMarkdownFile(inputFilePath, outputFilePath) {
   <meta charset="UTF-8">
   <title>Converted Markdown</title>
   <link rel="stylesheet" href="style.css">
-  <!-- MathJax -->
   <script>
     window.MathJax = {
       tex: {
