@@ -36,7 +36,7 @@ form.addEventListener('submit', async (e) => {
         });
         if (!res.ok) throw new Error(`Ошибка ${res.status}`);
         const json = await res.json();
-        alert(`The note is successfully upload: file:///C:/Users/ibrde/Desktop/obsites/static/note.html?id=${json.id}`);
+        displayOverlay(`/note.html?id=${json.id}`);
     } catch (err) {
         console.error(err);
         alert('Не удалось загрузить файл');
@@ -50,4 +50,10 @@ function displayPreview(text) {
     if (window.MathJax && window.MathJax.typeset) {
         MathJax.typeset();
     }
+}
+
+function displayOverlay(url) {
+    const linkToNote = document.getElementById('link-to-note');
+    linkToNote.href = url;
+    document.getElementById('overlay').style.display = 'flex';
 }

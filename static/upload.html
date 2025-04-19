@@ -37,7 +37,6 @@
         <div class="note-list">
             <form action="http://localhost:8000/upload/" method="post" enctype="multipart/form-data" id="upload-form">
                 <input class="input-text" type="text" placeholder="Title" id="title" name="title" required>
-            
                 <label class="default-button grey" id="file-label">
                     <div class="text-with-icon">
                         <img src="assets/lucide-icons/upload.svg" alt="Upload">
@@ -60,6 +59,12 @@
         </div>
     </div>
     <div id="preview" class="page-content shadow" style="display: none;"></div>
+    <div id="overlay" style="display: none;">
+        <div class="page-content shadow">
+            <p id="overlay-title" class="semibold-text24">Note successfully uploaded</p>
+            <a id="link-to-note" class="default-button black">View</a>
+        </div>
+    </div>
     <script src="parser.js"></script>
     <script src="upload.js"></script>
 </body>

@@ -159,7 +159,7 @@ function processInline(md) {
     md = md.replace(/\*(.*?)\*/g, '<em>$1</em>');
     md = md.replace(/_(.*?)_/g, '<em>$1</em>');
 
-    md = md.replace(/`([^`]+?)`/g, '<code>$1</code>');
+    md = md.replace(/`([^`]+?)`/g, '<code class="inline">$1</code>');
 
     return md;
 }
@@ -173,7 +173,7 @@ function processParagraphs(md) {
 
         if (!trimmed) continue;
 
-        const isBlock = /^<(h[1-6]|ul|ol|li|pre|blockquote|hr|img|div|p|table|code)/i.test(trimmed);
+        const isBlock = /^<(h[1-6]|ul|ol|li|pre|blockquote|hr|img|div|p|table)/i.test(trimmed);
         const isLatex = /^@@LATEXBLOCK\d+@@$/.test(trimmed);
 
         if (isBlock || isLatex) {

@@ -27,6 +27,10 @@ code {
     border-radius: 4px;
 }
 
+.inline {
+    display: inline;
+}
+
 #header {
     position: fixed;
     top: 0;
@@ -37,7 +41,7 @@ code {
     align-items: center;
     padding: 24px 36px;
     box-sizing: border-box;
-    z-index: 1000;
+    z-index: 1;
 }
 
 
