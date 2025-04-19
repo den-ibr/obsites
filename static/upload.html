@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Obsites</title>
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="upload-styles.css">
+    <link rel="stylesheet" href="text-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <script>
+        window.MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\\\(', '\\\\)']],
+            displayMath: [['$$','$$'], ['\\\\[', '\\\\]']]
+          }
+        };
+      </script>
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+</head>
+<body>
+    <nav id="header">
+        <div id="logo-and-title" class="semibold-text24">
+            <img id="logo" src="assets/logo.svg" alt="Logo" class="shadow">
+            Obsites
+        </div>
+        <a id="my-notes-button" style="display: none;">
+            Upload a note
+        </a>
+    </nav>
+    <div class="page-content shadow">
+        <p id="page-title" class="semibold-text24">Upload a new note</p>
+        <div class="note-list">
+            <form action="http://localhost:8000/upload/" method="post" enctype="multipart/form-data" id="upload-form">
+                <input class="input-text" type="text" placeholder="Title" id="title" name="title" required>
+            
+                <label class="default-button grey" id="file-label">
+                    <div class="text-with-icon">
+                        <img src="assets/lucide-icons/upload.svg" alt="Upload">
+                        <span id="file-label-text">Upload a file</span>
+                    </div>
+                    <input type="file" accept=".md,.txt" id="file" name="file">
+                </label>
+                <label id="paste-label" class="default-button grey">
+                    <div class="text-with-icon">
+                        <img src="assets/lucide-icons/clipboard-paste.svg" alt="Upload">
+                        Paste text [SOON]
+                    </div>
+                    <input type="button" id="paste" name="paste" disabled>
+                </label>
+                <button type="submit" id="submit" class="two-column default-button black text-with-icon">
+                    <img src="assets/lucide-icons/send-horizontal.svg" alt="Upload">
+                    Upload
+                </button>
+            </form>
+        </div>
+    </div>
+    <div id="preview" class="page-content shadow" style="display: none;"></div>
+    <script src="parser.js"></script>
+    <script src="upload.js"></script>
+</body>

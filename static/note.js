@@ -1,0 +1,19 @@
+const urlParams = new URLSearchParams(window.location.search);
+const id = urlParams.get('id');
+
+fetch(`http://localhost:8000/files/${id}`)
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.text();
+    })
+    .then((response) => {
+        const json = JSON.parse(response);
+        document.getElementById('title').innerText = json.title;
+        const html = markdownToHtmlBody(json.content);
+        document.getElementById('content').innerHTML += html;
+    })
+    .catch((error) => {
+        console.error('Ошибка при получении файла:', error);
+    });

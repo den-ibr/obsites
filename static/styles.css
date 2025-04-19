@@ -1,0 +1,127 @@
+* {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-weight: 400;
+    margin: 0;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 36px;
+    gap: 24px;
+    background-color: #f9f8f6;
+    margin: 0;
+}
+
+code {
+    display: block;
+    font-family: "JetBrains Mono", monospace;
+    font-optical-sizing: auto;
+    font-style: normal;
+    background-color: #f9f8f6;
+    border-radius: 4px;
+}
+
+#header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 36px;
+    box-sizing: border-box;
+    z-index: 1000;
+}
+
+
+#logo-and-title {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    cursor: default;
+}
+
+#logo {
+    width: 48px;
+    height: 48px;
+}
+
+#my-notes-button {
+    font-size: 20px;
+    color: #7c7c7c;
+    text-decoration: none;
+}
+
+.text-with-icon {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.semibold-text24 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.shadow {
+    filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.10));
+}
+
+.page-content {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 772px;
+    padding: 36px;
+    gap: 16px;
+    background-color: #fff;
+    border-radius: 24px;
+    border: #d1d1d1 solid 1px;
+}
+
+.align-center {
+    align-items: center;
+}
+
+
+
+@media (max-width: 1200px) {
+    .page-content {
+        margin-top: 72px;
+    }
+}
+
+@media (max-width: 772px) {
+    body {
+        padding: 24px 0px;
+    }
+
+    .page-content {
+        margin-top: 72px;
+        width: 100%;
+    }
+}
+
+/* Гарантируем, что блоковые формулы не будут флекситься и займут всю ширину */
+.MathJax_Display {
+    display: block !important;
+    flex: none !important;        /* не даём flex-растяжение/сжатие */
+    width: 100% !important;       /* занимают всю ширину контейнера */
+    white-space: normal !important;/* перенос по нормальным правилам */
+    margin: 1em 0;                 /* отступы сверху/снизу */
+  }
+  
+  /* Про инлайн‑формулы (чтоб не ломались в строчном flex-контейнере) */
+  .MathJax {
+    display: inline-block !important;
+    /* можно добавить vertical-align, если нужно: */
+    vertical-align: middle;
+  }
+  
