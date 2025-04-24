@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
-import psycopg2
 
-from get_files.get_html_page import router as test_router
+from get_files.save_html_page import router as test_router
+from bd.db_queries import insert_user, insert_note, get_all_notes_from_author
 
 app = FastAPI()
 
