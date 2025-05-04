@@ -20,12 +20,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.middleware("http")
-async def add_csp_header(request: Request, call_next):
-    response: Response = await call_next(request)
-    response.headers["Content-Security-Policy"] = "frame-ancestors 'self' https://telegram.org"
-    return response
-
 UPLOAD_DIR = "uploads"
 DATA_FILE = "data.json"
 
@@ -54,9 +48,6 @@ titles, current_id = load_data()
 async def upload_file(file: UploadFile, title: str = Form(...)):
     global current_id
 
-    if len(content) > MAX_FILE_SIZE:
-        raise HTTPException(status_code=413, detail="File too large")
-
     with lock:
         file_id = current_id
         current_id += 1
@@ -68,6 +59,8 @@ async def upload_file(file: UploadFile, title: str = Form(...)):
 
     with open(filepath, "wb") as f:
         content = await file.read()
+        if len(content) > MAX_FILE_SIZE:
+            raise HTTPException(status_code=413, detail="File too large")
         f.write(content)
 
     return {"id": file_id, "title": title}
