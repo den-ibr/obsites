@@ -90,6 +90,3 @@ async def get_file(file_id: int):
     }
 
 app.mount("/", StaticFiles(directory="static", html=True), name="static")
-
-if __name__ == "__main__":
-    uvicorn.run("main:app", reload=True)
