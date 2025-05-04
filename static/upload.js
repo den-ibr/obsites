@@ -36,7 +36,7 @@ form.addEventListener('submit', async (e) => {
         });
         if (!res.ok) throw new Error(`Ошибка ${res.status}`);
         const json = await res.json();
-        displayOverlay(`/note.html?id=${json.id}`);
+        displayOverlay(`obsites/static/note?id=${json.id}`);
     } catch (err) {
         console.error(err);
         alert('Не удалось загрузить файл');
