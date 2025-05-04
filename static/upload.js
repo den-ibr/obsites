@@ -30,7 +30,7 @@ form.addEventListener('submit', async (e) => {
     formData.append('title', titleInput.value);
 
     try {
-        const res = await fetch('http://89.169.160.182:8000/upload/', {
+        const res = await fetch('https://obsites-api.vercel.app/upload/', {
             method: 'POST',
             body: formData,
         });

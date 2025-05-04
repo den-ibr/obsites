@@ -90,5 +90,3 @@ async def get_file(file_id: int):
         "title": titles[key],
         "content": content
     }
-
-app.mount("/", StaticFiles(directory="static", html=True), name="static")

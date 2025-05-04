@@ -1,7 +1,7 @@
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get('id');
 
-fetch(`http://89.169.160.182:8000/files/${id}`)
+fetch(`https://obsites-api.vercel.app/files/${id}`)
     .then((response) => {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
