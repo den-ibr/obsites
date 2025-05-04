@@ -43,6 +43,9 @@ def save_data():
 
 titles, current_id = load_data()
 
+@app.get("/")
+def healthcheck():
+    return {"status": "ok"}
 
 @app.post("/upload/")
 async def upload_file(file: UploadFile, title: str = Form(...)):
