@@ -1,9 +1,14 @@
 from fastapi import FastAPI, UploadFile, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
+import uvicorn
+
 import os
 import json
 from threading import Lock
+
+MAX_FILE_SIZE = 1 * 1024 * 1024
 
 app = FastAPI()
 
@@ -43,7 +48,10 @@ titles, current_id = load_data()
 async def upload_file(file: UploadFile, title: str = Form(...)):
     global current_id
 
-    with lock:  # 🔒 Критическая секция
+    if len(content) > MAX_FILE_SIZE:
+        raise HTTPException(status_code=413, detail="File too large")
+
+    with lock:
         file_id = current_id
         current_id += 1
         titles[str(file_id)] = title
@@ -82,3 +90,6 @@ async def get_file(file_id: int):
     }
 
 app.mount("/", StaticFiles(directory="static", html=True), name="static")
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", reload=True)

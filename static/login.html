@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Obsites</title>
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="text-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav id="header">
+        <div id="logo-and-title" class="semibold-text24">
+            <img id="logo" src="assets/logo.svg" alt="Logo" class="shadow">
+            Obsites
+        </div>
+        <a id="my-notes-button" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+            My notes
+        </a>
+    </nav>
+    <div class="page-content shadow align-center">
+        <p class="semibold-text24">Publish your notes for free.</p>
+        Obsites makes sharing your Markdown notes effortless. Upload your notes in seconds and access them from anywhere, beautifully formatted and easy to navigate. Keep your knowledge organized, publish what matters, and focus on writing — Obsites handles the rest.
+        <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="obsites_bot" data-size="large" data-onauth="onTelegramAuth(user)" data-request-access="write"></script>
+        <script type="text/javascript">
+        function onTelegramAuth(user) {
+            alert('Logged in as ' + JSON.stringify(user)); // TODO прикрутить бэк
+        }
+        </script>
+    </div>
+</body>

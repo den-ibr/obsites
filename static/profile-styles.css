@@ -1,0 +1,49 @@
+#page-content {
+    padding: 36px 24px;
+}
+
+#page-title {
+    padding: 0px 12px;
+}
+
+.note-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+}
+
+.note-button {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 16px;
+    font-size: 20px;
+    text-decoration: none;
+    color: black;
+    transition-duration: 200ms;
+}
+
+.note-button:hover {
+    background-color: #f9f8f6;
+}
+
+.icon-container {
+    padding: 4px;
+    border-radius: 8px;
+}
+
+.hidden-icon {
+    opacity: 0;
+    transition-duration: 200ms;
+}
+
+.hidden-icon:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.note-button:hover .hidden-icon {
+    opacity: 1;
+}
