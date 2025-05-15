@@ -1,6 +1,7 @@
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get('id');
 
+while (!(window.MathJax && MathJax.typesetPromise)) { }
 fetch(`https://obsites-api.vercel.app/files/${id}`)
     .then((response) => {
         if (!response.ok) {
