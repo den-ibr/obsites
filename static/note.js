@@ -14,6 +14,7 @@ fetch(`https://obsites-api.vercel.app/files/${id}`)
         document.getElementById('title').innerText = json.title;
         const html = markdownToHtmlBody(json.content);
         document.getElementById('content').innerHTML += html;
+        MathJax.typesetPromise();
     })
     .catch((error) => {
         console.error('Ошибка при получении файла:', error);
