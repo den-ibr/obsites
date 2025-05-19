@@ -1,12 +1,13 @@
-from fastapi import FastAPI, Request, Response, UploadFile, Form, HTTPException
+from fastapi import Depends, FastAPI, Request, Response, UploadFile, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
-import uvicorn
 
 import os
 import json
 from threading import Lock
+from note import Note
+from telegram_user import TelegramUser
 
 MAX_FILE_SIZE = 1 * 1024 * 1024
 
@@ -21,7 +22,7 @@ app.add_middleware(
 )
 
 UPLOAD_DIR = "uploads"
-DATA_FILE = "data.json"
+DATA_FILE = "notes.json"
 
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
@@ -31,33 +32,37 @@ def load_data():
     if os.path.exists(DATA_FILE):
         with open(DATA_FILE, "r", encoding="utf-8") as f:
             data = json.load(f)
-            return data.get("titles", {}), data.get("current_id", 0)
+            raw_notes = data.get("notes", {})
+            parsed_notes = {
+                k: Note(**v) for k, v in raw_notes.items()
+            }
+            return parsed_notes, data.get("current_id", 0)
     return {}, 0
+
+notes, current_id = load_data()
 
 def save_data():
     with open(DATA_FILE, "w", encoding="utf-8") as f:
         json.dump({
-            "titles": titles,
+            "notes": {k: v.model_dump() for k, v in notes.items()},
             "current_id": current_id
         }, f, ensure_ascii=False, indent=2)
-
-titles, current_id = load_data()
 
 @app.get("/")
 def healthcheck():
     return {"status": "ok"}
 
 @app.post("/upload/")
-async def upload_file(file: UploadFile, title: str = Form(...)):
+async def upload_file(file: UploadFile, title: str = Form(...), author: TelegramUser = Depends()):
     global current_id
 
     with lock:
         file_id = current_id
         current_id += 1
-        titles[str(file_id)] = title
+        notes[str(file_id)] = Note(title=title, author_id=author.id)
         save_data()
+        filename = f"{file_id}.md"
 
-    filename = f"{file_id}.md"
     filepath = os.path.join(UPLOAD_DIR, filename)
 
     with open(filepath, "wb") as f:
@@ -68,12 +73,11 @@ async def upload_file(file: UploadFile, title: str = Form(...)):
 
     return {"id": file_id, "title": title}
 
-
 @app.get("/files/{file_id}")
 async def get_file(file_id: int):
     key = str(file_id)
 
-    if key not in titles:
+    if key not in notes:
         raise HTTPException(status_code=404, detail="File not found")
 
     filename = f"{file_id}.md"
@@ -87,6 +91,15 @@ async def get_file(file_id: int):
 
     return {
         "id": file_id,
-        "title": titles[key],
+        "title": notes[key],
         "content": content
     }
+
+@app.post("/notes")
+async def get_notes(author: TelegramUser):
+    result = [
+        {"id": k, "title": v.title}
+        for k, v in notes.items()
+        if v.author_id == author.id
+    ]
+    return result
