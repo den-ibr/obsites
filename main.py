@@ -7,7 +7,7 @@ import os
 import json
 from threading import Lock
 from note import Note
-from telegram_user import TelegramUser
+from telegram_user import is_correct_telegram_user
 
 MAX_FILE_SIZE = 1 * 1024 * 1024
 
@@ -48,42 +48,40 @@ def save_data():
             "current_id": current_id
         }, f, ensure_ascii=False, indent=2)
 
-def get_author(
-    id: int = Form(...),
-    first_name: str = Form(...),
-    username: str = Form(...),
-    auth_date: int = Form(...),
-    hash: str = Form(...)
-) -> TelegramUser:
-    return TelegramUser(
-        id=id,
-        first_name=first_name,
-        username=username,
-        auth_date=auth_date,
-        hash=hash
-    )
+async def get_author(request: Request) -> dict[str, str]:
+    form = await request.form()
+    form_data = {k: str(v) for k, v in form.items()}
+
+    if not is_correct_telegram_user(form_data.copy()):
+        raise HTTPException(status_code=403, detail="Invalid Telegram auth data")
+    
+    return form_data
 
 @app.get("/")
 def healthcheck():
     return {"status": "ok"}
 
 @app.post("/upload/")
-async def upload_file(file: UploadFile, title: str = Form(...), author: TelegramUser = Depends(get_author)):
+async def upload_file(
+    file: UploadFile,
+    title: str = Form(...),
+    author: dict = Depends(get_author)
+):
     global current_id
 
     with lock:
         file_id = current_id
         current_id += 1
-        notes[str(file_id)] = Note(title=title, author_id=author.id)
+        notes[str(file_id)] = Note(title=title, author_id=int(author['id']))
         save_data()
-        filename = f"{file_id}.md"
 
+    filename = f"{file_id}.md"
     filepath = os.path.join(UPLOAD_DIR, filename)
 
+    content = await file.read()
+    if len(content) > MAX_FILE_SIZE:
+        raise HTTPException(status_code=413, detail="File too large")
     with open(filepath, "wb") as f:
-        content = await file.read()
-        if len(content) > MAX_FILE_SIZE:
-            raise HTTPException(status_code=413, detail="File too large")
         f.write(content)
 
     return {"id": file_id, "title": title}
@@ -111,10 +109,10 @@ async def get_file(file_id: int):
     }
 
 @app.post("/notes")
-async def get_notes(author: TelegramUser):
-    result = [
+async def get_notes(author: dict = Depends(get_author)):
+    user_id = int(author['id'])
+    return [
         {"id": k, "title": v.title}
         for k, v in notes.items()
-        if v.author_id == author.id
+        if v.author_id == user_id
     ]
-    return result

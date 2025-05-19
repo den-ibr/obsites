@@ -40,11 +40,12 @@ form.addEventListener('submit', async (e) => {
     const formData = new FormData();
     formData.append('file', fileInput.files[0]);
     formData.append('title', titleInput.value);
-    formData.append('id', user.id);
-    formData.append('first_name', user.first_name);
-    formData.append('username', user.username);
-    formData.append('auth_date', user.auth_date);
-    formData.append('hash', user.hash);
+    
+    Object.entries(user).forEach(([key, value]) => {
+        if (value != null) {
+            formData.append(key, value);
+        }
+    });
 
     try {
         const res = await fetch('https://obsites-api.vercel.app/upload/', {
