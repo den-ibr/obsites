@@ -8,9 +8,9 @@ BOT_TOKEN = getenv('BOT_TOKEN')
 
 
 class TelegramUser(BaseModel):
-    auth_date: int
+    auth_date: str  # ?
     first_name: str
-    id: int
+    id: str  # ?
     username: str
     hash: str
 
