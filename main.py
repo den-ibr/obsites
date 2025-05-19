@@ -48,12 +48,27 @@ def save_data():
             "current_id": current_id
         }, f, ensure_ascii=False, indent=2)
 
+def get_author(
+    id: int = Form(...),
+    first_name: str = Form(...),
+    username: str = Form(...),
+    auth_date: int = Form(...),
+    hash: str = Form(...)
+) -> TelegramUser:
+    return TelegramUser(
+        id=id,
+        first_name=first_name,
+        username=username,
+        auth_date=auth_date,
+        hash=hash
+    )
+
 @app.get("/")
 def healthcheck():
     return {"status": "ok"}
 
 @app.post("/upload/")
-async def upload_file(file: UploadFile, title: str = Form(...), author: TelegramUser = Depends()):
+async def upload_file(file: UploadFile, title: str = Form(...), author: TelegramUser = Depends(get_author)):
     global current_id
 
     with lock:
