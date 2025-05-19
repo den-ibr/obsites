@@ -104,7 +104,7 @@ async def get_file(file_id: int):
 
     return {
         "id": file_id,
-        "title": notes[key],
+        "title": notes[key].title,
         "content": content
     }
 
