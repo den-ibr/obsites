@@ -23,6 +23,6 @@ class TelegramUser(BaseModel):
         secret_key = hashlib.sha256(BOT_TOKEN.encode()).digest()
         computed_hash = hmac.new(secret_key, data_check_string.encode(), hashlib.sha256).hexdigest()
         if computed_hash != values.get('hash'):
-            raise ValueError('Invalid login data')
+            raise ValueError(f'Invalid login data, {computed_hash} != {values.get(hash)}')
         print('Успех!')
         return values
