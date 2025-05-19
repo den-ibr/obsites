@@ -16,10 +16,13 @@ class TelegramUser(BaseModel):
 
     @model_validator(mode='before')
     def check_hash(cls, values: dict[str, any]) -> dict[str, any]:
-        data_check_string = f'auth_date={values.get('auth_date')}\nfirst_name={values.get('first_name')}\nid={values.get('id')}\nusername={values.get('username')}'
+        data_check_keys = sorted(
+            k for k in values.keys() if k != 'hash' and values[k] is not None
+        )
+        data_check_string = '\n'.join(f"{k}={values[k]}" for k in data_check_keys)
         secret_key = hashlib.sha256(BOT_TOKEN.encode()).digest()
         computed_hash = hmac.new(secret_key, data_check_string.encode(), hashlib.sha256).hexdigest()
         if computed_hash != values.get('hash'):
-            raise ValueError(f'Invalid login data')
+            raise ValueError('Invalid login data')
         print('Успех!')
         return values
