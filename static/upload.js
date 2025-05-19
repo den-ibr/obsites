@@ -7,7 +7,6 @@ const titleInput = document.getElementById('title');
 const userRaw = localStorage.getItem('tg_user');
 if (!userRaw) {
     window.location.href = './login';
-    return;
 }
 let user;
 try {
