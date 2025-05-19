@@ -15,7 +15,6 @@ try {
 } catch (err) {
     console.error('Invalid user data in localStorage');
     window.location.href = './login';
-    return;
 }
 
 fileInput.addEventListener('change', () => {
