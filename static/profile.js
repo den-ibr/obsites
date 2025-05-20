@@ -29,21 +29,19 @@ Object.entries(user).forEach(([key, value]) => {
     }
 });
 
-try {
-    fetch('https://obsites-api.vercel.app/notes/', {
-        method: 'POST',
-        body: formData,
-    }).then((response) => {
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.text;
-    }).then((response) => {
-        const json = JSON.parse(response);
-        for (note of json) {
-            addButton(note.id, note.title)
-        }
-    })
-} catch (err) {
-    console.log(err);
-}
+fetch('https://obsites-api.vercel.app/notes/', {
+    method: 'POST',
+    body: formData,
+}).then((response) => {
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response.text();
+}).then((response) => {
+    const json = JSON.parse(response);
+    for (note of json) {
+        addButton(note.id, note.title)
+    }
+}).catch((err) => {
+    console.error('Fetch error:', err);
+});
