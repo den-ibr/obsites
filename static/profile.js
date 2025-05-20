@@ -32,7 +32,7 @@ function addButton(id, title) {
             body: formData,
         })
             .then(
-                (response) => (button.querySelector('a').style.display = 'none')
+                function(response) { button.querySelector('a').style.display = 'none' }
             )
             .catch((err) => console.log(err));
     });
