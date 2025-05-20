@@ -108,7 +108,7 @@ async def get_file(file_id: int):
         "content": content
     }
 
-@app.post("/notes")
+@app.post("/notes/")
 async def get_notes(author: dict = Depends(get_author)):
     user_id = int(author['id'])
     return [
