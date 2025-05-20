@@ -41,7 +41,6 @@ code {
     align-items: center;
     padding: 24px 36px;
     box-sizing: border-box;
-    z-index: 1;
 }
 
 
@@ -99,6 +98,10 @@ code {
 @media (max-width: 1200px) {
     .page-content {
         margin-top: 72px;
+    }
+
+    #header {
+        z-index: 1;
     }
 }
 
