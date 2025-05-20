@@ -26,28 +26,35 @@ function addButton(id, title) {
     button.querySelector('a').href = `./note?id=${id}`;
     button.querySelector('p').textContent = title;
     button.querySelector('img').addEventListener('click', (event) => {
-        event.preventDefault()
+        event.preventDefault();
         fetch(`https://obsites-api.vercel.app/delete/${id}`, {
             method: 'POST',
             body: formData,
-        }).then(button.querySelector('a').style.display = 'none')
-    })
+        })
+            .then(
+                (response) => (button.querySelector('a').style.display = 'none')
+            )
+            .catch((err) => console.log(err));
+    });
     container.appendChild(button);
 }
 
 fetch('https://obsites-api.vercel.app/notes/', {
     method: 'POST',
     body: formData,
-}).then((response) => {
-    if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    return response.text();
-}).then((response) => {
-    const json = JSON.parse(response);
-    for (note of json) {
-        addButton(note.id, note.title)
-    }
-}).catch((err) => {
-    console.error('Fetch error:', err);
-});
+})
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.text();
+    })
+    .then((response) => {
+        const json = JSON.parse(response);
+        for (note of json) {
+            addButton(note.id, note.title);
+        }
+    })
+    .catch((err) => {
+        console.error('Fetch error:', err);
+    });
