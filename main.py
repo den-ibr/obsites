@@ -116,3 +116,12 @@ async def get_notes(author: dict = Depends(get_author)):
         for k, v in notes.items()
         if v.author_id == user_id
     ]
+
+@app.post("/delete/{id}")
+async def delete_note(id: int, author: dict = Depends(get_author)):
+    key = str(id)
+    if key not in notes:
+        raise HTTPException(status_code=404, detail="File not found")
+
+    del notes[key]
+    return "ok"

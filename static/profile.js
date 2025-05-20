@@ -1,14 +1,6 @@
 const template = document.getElementById('note-button-template');
 const container = document.querySelector('.note-list');
 
-function addButton(id, title) {
-    const button = template.content.cloneNode(true);
-    button.querySelector('a').href = `./note?id=${id}`;
-    console.log(button);
-    button.querySelector('p').textContent = title;
-    container.appendChild(button);
-}
-
 const userRaw = localStorage.getItem('tg_user');
 if (!userRaw) {
     window.location.href = './login';
@@ -28,6 +20,20 @@ Object.entries(user).forEach(([key, value]) => {
         formData.append(key, value);
     }
 });
+
+function addButton(id, title) {
+    const button = template.content.cloneNode(true);
+    button.querySelector('a').href = `./note?id=${id}`;
+    button.querySelector('p').textContent = title;
+    button.querySelector('img').addEventListener('click', (event) => {
+        event.preventDefault()
+        fetch(`https://obsites-api.vercel.app/delete/${id}`, {
+            method: 'POST',
+            body: formData,
+        }).then(button.querySelector('a').style.display = 'none')
+    })
+    container.appendChild(button);
+}
 
 fetch('https://obsites-api.vercel.app/notes/', {
     method: 'POST',
