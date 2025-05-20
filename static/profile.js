@@ -23,7 +23,8 @@ Object.entries(user).forEach(([key, value]) => {
 
 function addButton(id, title) {
     const button = template.content.cloneNode(true);
-    button.querySelector('a').href = `./note?id=${id}`;
+    const a = button.querySelector('a');
+    a.href = `./note?id=${id}`;
     button.querySelector('p').textContent = title;
     button.querySelector('img').addEventListener('click', (event) => {
         event.preventDefault();
@@ -31,9 +32,9 @@ function addButton(id, title) {
             method: 'POST',
             body: formData,
         })
-            .then(
-                function(response) { button.querySelector('a').style.display = 'none' }
-            )
+            .then(() => {
+                a.style.display = 'none';
+            })
             .catch((err) => console.log(err));
     });
     container.appendChild(button);
