@@ -23,9 +23,10 @@ Object.entries(user).forEach(([key, value]) => {
 
 function addButton(id, title) {
     const button = template.content.cloneNode(true);
-    const a = button.querySelector('a');
+    const a = button.querySelector('.note-button');
     a.href = `./note?id=${id}`;
     button.querySelector('p').textContent = title;
+    button.querySelector('.edit').href = `./edit?id=${id}`;
     button.querySelector('.delete').addEventListener('click', (event) => {
         event.preventDefault();
         fetch(`https://obsites-api.vercel.app/delete/${id}`, {
