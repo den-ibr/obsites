@@ -37,6 +37,8 @@
 
 .hidden-button {
     display: flex;
+    border: none;
+    margin: 0px;
     gap: 0px;
     padding: 0px;
     opacity: 0;
