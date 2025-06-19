@@ -26,7 +26,10 @@ function addButton(id, title) {
     const a = button.querySelector('.note-button');
     a.href = `./note?id=${id}`;
     button.querySelector('p').textContent = title;
-    button.querySelector('.edit').href = `./edit?id=${id}`;
+    button.querySelector('.edit').addEventListener('click', (event) => {
+        event.preventDefault;
+        window.location.href = `./edit?id=${id}`;
+    });
     button.querySelector('.delete').addEventListener('click', (event) => {
         event.preventDefault();
         fetch(`https://obsites-api.vercel.app/delete/${id}`, {
