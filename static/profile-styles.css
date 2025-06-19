@@ -36,6 +36,9 @@
 }
 
 .hidden-button {
+    display: flex;
+    gap: 0px;
+    padding: 0px;
     opacity: 0;
     transition-duration: 200ms;
 }
