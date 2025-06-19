@@ -26,7 +26,7 @@ function addButton(id, title) {
     const a = button.querySelector('a');
     a.href = `./note?id=${id}`;
     button.querySelector('p').textContent = title;
-    button.querySelector('img').addEventListener('click', (event) => {
+    button.querySelector('.delete').addEventListener('click', (event) => {
         event.preventDefault();
         fetch(`https://obsites-api.vercel.app/delete/${id}`, {
             method: 'POST',
