@@ -27,7 +27,7 @@ function addButton(id, title) {
     a.href = `./note?id=${id}`;
     button.querySelector('p').textContent = title;
     button.querySelector('.edit').addEventListener('click', (event) => {
-        event.preventDefault;
+        event.preventDefault();
         window.location.href = `./edit?id=${id}`;
     });
     button.querySelector('.delete').addEventListener('click', (event) => {
