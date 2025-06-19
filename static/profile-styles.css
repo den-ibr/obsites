@@ -30,6 +30,12 @@
     background-color: #f9f8f6;
 }
 
+.right-icons-list {
+    display: flex;
+    padding: 0px;
+    gap: 8px;
+}
+
 .icon-container {
     padding: 4px;
     border-radius: 8px;
@@ -41,6 +47,8 @@
     margin: 0px;
     gap: 0px;
     padding: 0px;
+    border-radius: 8px;
+    background: none;
     opacity: 0;
     transition-duration: 200ms;
 }
