@@ -63,7 +63,7 @@ form.addEventListener('submit', async (event) => {
 
     const formData = new FormData();
     formData.append('content', noteContent.innerText);
-    formData.append('title', titleInput.value);
+    formData.append('title', title.value);
 
     Object.entries(user).forEach(([key, value]) => {
         if (value != null) {
