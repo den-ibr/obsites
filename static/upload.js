@@ -76,7 +76,7 @@ form.addEventListener('submit', async (e) => {
 
 function displayPreview(text) {
     const preview = document.getElementById('preview');
-    preview.style.display = 'flex';
+    preview.style.display = 'block';
     preview.innerHTML = markdownToHtmlBody(text);
     if (window.MathJax && window.MathJax.typeset) {
         MathJax.typeset();
