@@ -8,10 +8,7 @@
     <link rel="stylesheet" href="text-styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
     <script>
         window.MathJax = {
           tex: {
@@ -47,9 +44,9 @@
                 <label id="paste-label" class="default-button grey">
                     <div class="text-with-icon">
                         <img src="assets/lucide-icons/clipboard-paste.svg" alt="Upload">
-                        Paste text [SOON]
+                        Paste text
                     </div>
-                    <input type="button" id="paste" name="paste" disabled>
+                    <input type="button" id="paste" name="paste">
                 </label>
                 <button type="submit" id="submit" class="two-column default-button black text-with-icon">
                     <img src="assets/lucide-icons/send-horizontal.svg" alt="Upload">
@@ -58,7 +55,7 @@
             </form>
         </div>
     </div>
-    <div id="preview" class="page-content shadow" style="display: none;"></div>
+    <div id="preview" class="page-content shadow display-block" style="display: none;"></div>
     <div id="overlay" style="display: none;">
         <div class="page-content shadow">
             <p id="overlay-title" class="semibold-text24">Note successfully uploaded</p>

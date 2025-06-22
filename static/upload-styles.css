@@ -46,9 +46,8 @@ form {
     display: none;
 }
 
-#paste-label {
-    opacity: 0.5;
-    cursor: default;
+.display-block {
+    display:block;
 }
 
 #overlay {

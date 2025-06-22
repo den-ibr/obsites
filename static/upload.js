@@ -3,6 +3,8 @@ const fileLabel = document.getElementById('file-label');
 const fileLabelText = document.getElementById('file-label-text');
 const form = document.getElementById('upload-form');
 const titleInput = document.getElementById('title');
+const pasteButton = document.getElementById('paste');
+
 let content = '';
 
 const userRaw = localStorage.getItem('tg_user');
@@ -30,6 +32,15 @@ fileInput.addEventListener('change', () => {
         fileLabelText.textContent = 'Upload a file';
     }
 });
+
+pasteButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    navigator.clipboard.readText()
+        .then(text => {
+            content = text;
+            displayPreview(content);
+        })
+})
 
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
