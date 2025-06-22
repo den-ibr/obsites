@@ -85,6 +85,24 @@ async def upload_file(
 
     return {"id": file_id, "title": title}
 
+@app.post("/edit/{id}")
+async def edit_file(
+    id: int,
+    content: str = Form(...),
+    title: str = Form(...),
+    author: dict = Depends(get_author)
+):
+    filename = f"{id}.md"
+    filepath = os.path.join(UPLOAD_DIR, filename)
+
+    notes[str(id)].title = title
+
+    with open(filepath, "w", encoding="utf-8") as f:
+        f.write(content)
+
+    return {"id": id, "title": title}
+    
+
 @app.get("/files/{file_id}")
 async def get_file(file_id: int):
     key = str(file_id)
