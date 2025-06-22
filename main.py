@@ -50,7 +50,7 @@ def save_data():
 
 async def get_author(request: Request) -> dict[str, str]:
     form = await request.form()
-    form_data = {k: str(v) for k, v in form.items() if k not in ('title', 'file')}
+    form_data = {k: str(v) for k, v in form.items() if k not in ('title', 'file', 'content')}
 
     if not is_correct_telegram_user(form_data.copy()):
         raise HTTPException(status_code=403, detail="Invalid Telegram auth data")
