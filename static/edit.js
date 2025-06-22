@@ -40,7 +40,7 @@ fetch(`https://obsites-api.vercel.app/files/${id}`)
     })
     .then((response) => {
         const json = JSON.parse(response);
-        title.innerText = json.title;
+        title.value = json.title;
         noteContent.innerText = json.content;
         updatePreview();
 
