@@ -45,8 +45,8 @@ pasteButton.addEventListener('click', (event) => {
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    if (fileInput.files.length === 0) {
-        alert('Please select a file before submitting.');
+    if (content === '') {
+        alert('Please select a file or paste the content before submitting.');
         return;
     }
 
