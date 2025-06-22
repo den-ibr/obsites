@@ -80,7 +80,7 @@ async def upload_file(
 
     if len(content) > MAX_FILE_SIZE:
         raise HTTPException(status_code=413, detail="File too large")
-    with open(filepath, "wb") as f:
+    with open(filepath, "w", encoding="utf-8") as f:
         f.write(content)
 
     return {"id": file_id, "title": title}
