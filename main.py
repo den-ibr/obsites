@@ -53,7 +53,7 @@ async def get_author(request: Request) -> dict[str, str]:
     form_data = {k: str(v) for k, v in form.items() if k not in ('title', 'file', 'content')}
 
     if not is_correct_telegram_user(form_data.copy()):
-        raise HTTPException(status_code=403, detail="Invalid Telegram auth data")
+        raise HTTPException(status_code=403, detail=f"Invalid Telegram auth data: {form_data}")
     
     return form_data
 
