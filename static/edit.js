@@ -1,6 +1,7 @@
 const noteContent = document.getElementById('note-content');
 const title = document.getElementById('title');
 const preview = document.getElementById('preview');
+const form = document.getElementById('upload-form');
 
 const userRaw = localStorage.getItem('tg_user');
 if (!userRaw) {
