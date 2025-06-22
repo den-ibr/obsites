@@ -3,6 +3,7 @@ const fileLabel = document.getElementById('file-label');
 const fileLabelText = document.getElementById('file-label-text');
 const form = document.getElementById('upload-form');
 const titleInput = document.getElementById('title');
+let content = '';
 
 const userRaw = localStorage.getItem('tg_user');
 if (!userRaw) {
@@ -21,7 +22,8 @@ fileInput.addEventListener('change', () => {
         fileLabelText.textContent = fileInput.files[0].name;
         const reader = new FileReader();
         reader.addEventListener('load', () => {
-            displayPreview(reader.result);
+            content = reader.result;
+            displayPreview(content);
         });
         reader.readAsText(fileInput.files[0]);
     } else {
@@ -38,7 +40,7 @@ form.addEventListener('submit', async (e) => {
     }
 
     const formData = new FormData();
-    formData.append('file', fileInput.files[0]);
+    formData.append('content', content);
     formData.append('title', titleInput.value);
     
     Object.entries(user).forEach(([key, value]) => {

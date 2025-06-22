@@ -63,7 +63,7 @@ def healthcheck():
 
 @app.post("/upload/")
 async def upload_file(
-    file: UploadFile,
+    content: str = Form(...),
     title: str = Form(...),
     author: dict = Depends(get_author)
 ):
@@ -78,7 +78,6 @@ async def upload_file(
     filename = f"{file_id}.md"
     filepath = os.path.join(UPLOAD_DIR, filename)
 
-    content = await file.read()
     if len(content) > MAX_FILE_SIZE:
         raise HTTPException(status_code=413, detail="File too large")
     with open(filepath, "wb") as f:
