@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Obsites</title>
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="upload-styles.css">
+    <link rel="stylesheet" href="text-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <script>
+        window.MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\\\(', '\\\\)']],
+            displayMath: [['$$','$$'], ['\\\\[', '\\\\]']]
+          },
+          options: {
+            ignoreHtmlClass: 'large-text-input'
+          }
+        };
+      </script>
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+</head>
+<body>
+    <nav id="header">
+        <div id="logo-and-title" class="semibold-text24">
+            <img id="logo" src="assets/logo.svg" alt="Logo" class="shadow">
+            Obsites
+        </div>
+        <a id="my-notes-button" href="./profile">
+            My notes
+        </a>
+    </nav>
+    <div class="page-content shadow">
+        <p id="page-title" class="semibold-text24">Edit note</p>
+        <div class="note-list">
+            <form action="https://obsites-api.vercel.app/upload/" method="post" enctype="multipart/form-data" id="upload-form">
+                <input class="input-text" type="text" placeholder="Title" id="title" name="title" required>
+                <button type="submit" id="submit" class="two-column default-button black text-with-icon">
+                    <img src="assets/lucide-icons/send-horizontal.svg" alt="Upload">
+                    Save changes
+                </button>
+            </form>
+        </div>
+    </div>
+    <div class="page-content shadow">
+        <span id="note-content" class="large-text-input" contenteditable></span>
+    </div>
+    <div id="preview" class="page-content shadow display-block"></div>
+    <div id="overlay" style="display: none;">
+        <div class="page-content shadow">
+            <p id="overlay-title" class="semibold-text24">Note successfully updated</p>
+            <a id="link-to-note" class="default-button black">View</a>
+        </div>
+    </div>
+    <script src="parser.js"></script>
+    <script src="edit.js"></script>
+</body>
