@@ -42,7 +42,7 @@ fetch(`https://obsites-api.vercel.app/files/${id}`)
         const json = JSON.parse(response);
         title.value = json.title;
         noteContent.innerText = json.content;
-        updatePreview();
+        updatePreview(noteContent.innerText);
 
         if (window.MathJax && window.MathJax.typesetPromise) {
             MathJax.typesetPromise();
