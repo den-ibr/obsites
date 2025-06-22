@@ -2,7 +2,6 @@
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
-    font-weight: 400;
     margin: 0;
     overflow-wrap: break-word;
     white-space: normal;
@@ -18,13 +17,14 @@ body {
     margin: 0;
 }
 
-code {
+code, .large-text-input {
     display: block;
     font-family: "JetBrains Mono", monospace;
     font-optical-sizing: auto;
     font-style: normal;
     background-color: #f9f8f6;
     border-radius: 4px;
+    border: none;
 }
 
 .inline {
@@ -116,19 +116,6 @@ code {
     }
 }
 
-/* Гарантируем, что блоковые формулы не будут флекситься и займут всю ширину */
-.MathJax_Display {
-    display: block !important;
-    flex: none !important;        /* не даём flex-растяжение/сжатие */
-    width: 100% !important;       /* занимают всю ширину контейнера */
-    white-space: normal !important;/* перенос по нормальным правилам */
-    margin: 1em 0;                 /* отступы сверху/снизу */
-  }
-  
-  /* Про инлайн‑формулы (чтоб не ломались в строчном flex-контейнере) */
-  .MathJax {
-    display: inline-block !important;
-    /* можно добавить vertical-align, если нужно: */
-    vertical-align: middle;
-  }
-  
+mjx-container * {
+  all: unset;
+}
