@@ -15,14 +15,6 @@ try {
     window.location.href = './login';
 }
 
-function updatePreview(text) {
-    const preview = document.getElementById('preview');
-    preview.innerHTML = markdownToHtmlBody(text);
-    if (window.MathJax && window.MathJax.typeset) {
-        MathJax.typeset();
-    }
-}
-
 noteContent.addEventListener('input', () => {
     updatePreview(noteContent.innerText);
 });
@@ -83,6 +75,14 @@ form.addEventListener('submit', async (event) => {
         alert('Не удалось загрузить файл');
     }
 });
+
+function updatePreview(text) {
+    const preview = document.getElementById('preview');
+    preview.innerHTML = markdownToHtmlBody(text);
+    if (window.MathJax && window.MathJax.typeset) {
+        MathJax.typeset();
+    }
+}
 
 function displayOverlay(url) {
     const linkToNote = document.getElementById('link-to-note');
