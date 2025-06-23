@@ -7,6 +7,10 @@
     white-space: normal;
 }
 
+pre, code {
+    white-space: pre;
+}
+
 body {
     display: flex;
     flex-direction: column;
