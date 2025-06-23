@@ -24,7 +24,7 @@ function extractCodeBlocks(md) {
 function restoreCodeBlocks(md, codeBlocks) {
     codeBlocks.forEach((code, index) => {
         const placeholder = `@@CODEBLOCK${index}@@`;
-        const escaped = escapeHtml(code).replace(/\n/g, '<br>');
+        const escaped = escapeHtml(code);
         md = md.replace(
             placeholder,
             `<pre><code>${escaped}</code></pre>`
