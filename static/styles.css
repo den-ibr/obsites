@@ -4,11 +4,6 @@
     font-style: normal;
     margin: 0;
     overflow-wrap: break-word;
-    white-space: normal;
-}
-
-pre, pre * {
-    white-space: pre;
 }
 
 body {
